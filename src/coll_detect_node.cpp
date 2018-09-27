@@ -7,13 +7,12 @@
   ros::Publisher stop_pub;
   ros::Subscriber scan_sub;
 
-  bool stop = false;
+  bool stop;
   float collision_threshold = 0.4;
 
   void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
   stop = false;
-  stop_msg.data = stop;
   //for loop to check every value in the ranges array from the LaserScan msg from the lidar node
   for(int i = 0; i < scan->ranges.size(); i = i + 1)
   {
@@ -22,10 +21,10 @@
     if (scan->ranges[i] < collision_threshold)
       {
         stop = true;
-        stop_msg.data = stop;
 	break;
       }
   }
+  stop_msg.data = stop;
   stop_pub.publish(stop_msg);
 
   
