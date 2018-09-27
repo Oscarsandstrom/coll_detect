@@ -1,22 +1,25 @@
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 #include <std_msgs/Bool.h>
-
+  // setup for the message, publisher, subscriber and variables
   std_msgs::Bool stop_msg;
 
   ros::Publisher stop_pub;
   ros::Subscriber scan_sub;
 
-  bool stop;
+  bool stop = false;
   float collision_threshold = 0.4;
 
   void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
-
+  stop = false;
+  stop_msg.data = stop;
+  //for loop to check every value in the ranges array from the LaserScan msg from the lidar node
   for(int i = 0; i < scan->ranges.size(); i = i + 1)
   {
-  stop = false;
-    if (scan->ranges[i] < collision_threshold)//TODO look up values from lidar
+  
+    //if function to test the values relative to our collision threshold. As soon a value is found that is lower than 0.4m the loop breaks and the publish function is started
+    if (scan->ranges[i] < collision_threshold)
       {
         stop = true;
         stop_msg.data = stop;
