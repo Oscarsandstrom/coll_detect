@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   
   ros::NodeHandle nh_;
   
-  stop_pub = nh_.advertise<std_msgs::Bool>("lidar/stop", 1);
+  stop_pub = nh_.advertise<std_msgs::Bool>("lidar_stop", 1);
   scan_sub = nh_.subscribe<sensor_msgs::LaserScan>("scan", 1, scanCallback);
 
   ros::spin();
