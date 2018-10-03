@@ -18,7 +18,7 @@
   {
   
     //if function to test the values relative to our collision threshold. As soon a value is found that is lower than 0.4m the loop breaks and the publish function is started
-    if (scan->ranges[i] < collision_threshold)
+    if (0 < scan->ranges[i] && scan->ranges[i] < collision_threshold)
       {
         stop = true;
 	break;
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   
   ros::NodeHandle nh_;
   
-  stop_pub = nh_.advertise<std_msgs::Bool>("lidar_stop", 1);
+  stop_pub = nh_.advertise<std_msgs::Bool>("lidarstop", 1);
   scan_sub = nh_.subscribe<sensor_msgs::LaserScan>("scan", 1, scanCallback);
 
   ros::spin();
