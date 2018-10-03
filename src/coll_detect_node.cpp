@@ -8,7 +8,7 @@
   ros::Subscriber scan_sub;
 
   bool stop;
-  float collision_threshold = 0.4;
+  float collision_threshold = 400.0;
 
   void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan)
 {
