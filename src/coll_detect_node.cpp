@@ -55,10 +55,10 @@ int main(int argc, char** argv)
   ros::NodeHandle nh_;
   ros::NodeHandle n_("~");
 
-  n_.param<float>("k11",k11,2.5);
-  n_.param<float>("collision_threshold", collision_threshold, 0.4);
-  n_.param<float>("kr11",kr11,2.5); 
-  n_.param<float>("t_delay",t_delay,0.1);
+  n_.param<float>("k11",k11,1.5);
+  n_.param<float>("collision_threshold", collision_threshold, 0.5);
+  n_.param<float>("kr11",kr11,1.5); 
+  n_.param<float>("t_delay",t_delay,0.0);
 
   ROS_INFO("k11: %f, collision_threshold: %f, kr11: %f, t_delay: %f", kr11, collision_threshold, kr11, t_delay);
 
