@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 #include <std_msgs/Bool.h>
-#include <std_msgs/Float32MultiArray.h>
+#include <geometry_msgs/Twist.h>
 
   // setup for the message, publisher, subscriber and variables
   std_msgs::Bool stop_msg;
@@ -41,9 +41,9 @@
 
 }
 
-void vwCallback(const std_msgs::Float32MultiArray::ConstPtr& array)
+void vwCallback(const geometry_msgs::Twist::ConstPtr& array)
 {
-  v = array->data[0];
+  v = array->linear.x;
 }
 
 
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 
   stop_pub = nh_.advertise<std_msgs::Bool>("lidar_stop", 1);
   scan_sub = nh_.subscribe<sensor_msgs::LaserScan>("scan", 1, scanCallback);
-  velosety_sub = nh_.subscribe<std_msgs::Float32MultiArray>("vw_estimate", 1, vwCallback);
+  velosety_sub = nh_.subscribe<geometry_msgs::Twist>("vw_estimate", 1, vwCallback);
 
   ros::spin();
 }
